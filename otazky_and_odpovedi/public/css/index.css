@@ -1,0 +1,60 @@
+html{
+    background: linear-gradient(112.1deg, rgb(32, 38, 57) 100%, rgb(63, 76, 119) 100%);
+    font-family: Roboto;
+}
+
+.main_heading{
+    text-align: center;
+    color: white;
+}
+
+.questions_container{
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    width: 50%;
+    text-align: center;
+    justify-content: center;
+    background-color: white;
+    border-radius: 20px;
+}
+.question{
+    border: 1px solid;
+    border-radius: 20px;
+}
+
+.answer{
+    text-align: center;
+    margin: auto;
+    overflow-y: scroll;
+    max-width: 75ch;
+    white-space: break-spaces;
+    height: 200px;
+    border-radius: 20px;
+}
+input{
+    display: block;
+    text-align: center;
+    margin: auto;
+    margin-top: 10px;
+}
+textarea{
+    margin: auto;
+    width: 50%;
+    text-align: center;
+    border-radius: 20px;
+}
+.ask{
+    margin: auto;
+    text-align: center;
+    justify-content: center;
+}
+.ask_textarea{
+    text-align: center;
+    margin: auto;
+    max-width: 75ch;
+    height: 200px;
+    border-radius: 20px;
+    resize: none;
+}

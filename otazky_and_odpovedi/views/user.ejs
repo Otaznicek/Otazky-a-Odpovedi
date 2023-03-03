@@ -1,0 +1,46 @@
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/index.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Otazky a Odpovedi
+    </title>
+</head>
+<body>
+<h1 class="main_heading"><%= user["username"] %></h1>
+
+<div class="ask">
+<form action="./ask" method="post">
+    <input type="hidden" name="uid" value="<%= user["uid"]%>">
+    <textarea class="ask_textarea" name="question" id="" cols="30" rows="10" placeholder="Zeptej se zde" ></textarea>
+    <input type="submit" value="Zeptej se">
+</form>
+
+</div>
+
+<div class="questions_container">
+<% questions.forEach(question => { %>
+    <div class="question"><h1 class="question_heading"><%- question["question"]%></h1>
+    <% if (question["answer"] != null ) { %>
+        <p class="answer"><span class="material-symbols-outlined">
+            reply
+            </span>: <%= question["answer"] %></p>
+    <% } else{ %>
+        <span class="material-symbols-outlined">
+            reply
+            </span>
+
+        <%}%>
+
+    </div>
+   <% }) %>
+</div>
+<a class="logout" href="./logout">logout</a>
+</body>
+</html>

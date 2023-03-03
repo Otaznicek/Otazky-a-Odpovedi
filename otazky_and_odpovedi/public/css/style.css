@@ -1,0 +1,58 @@
+html{
+    background: linear-gradient(112.1deg, rgb(32, 38, 57) 100%, rgb(63, 76, 119) 100%);
+    font-family: Roboto;
+}
+
+.login_form_div{
+    position: relative;
+    width: 20%;
+    margin: auto;
+    text-align: center;
+    background-color: white;
+    margin-top: 10vh;
+    border-radius: 10px;
+}
+.register_form_div{
+    position: relative;
+    width: 20%;
+    margin: auto;
+    text-align: center;
+    background-color: white;
+    margin-top: 10vh;
+    border-radius: 10px;
+}
+
+form{
+    position: relative;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 5%;
+}
+
+input{
+    font-size: 20px;
+    text-align: center;
+    size: 10px;
+    margin: auto;
+    width: 50%;
+    margin-bottom: 50px;
+    display: block;
+}
+label{
+    margin: auto;
+    text-align: center;
+    width: 50%;
+    size: 10px;
+    display: inline-block;
+}
+.submit{
+    border-radius: 5px;
+    border: 1px solid;
+}
+
+.ask{
+    margin: auto;
+    text-align: center;
+    justify-content: center;
+}
