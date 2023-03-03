@@ -204,6 +204,7 @@ app.post("/answer",(req,res)=>{
         if(err){
             res.send("Error")
         }
+        
     })
     res.render("redirect",{redirect_to:"./"})
 })
