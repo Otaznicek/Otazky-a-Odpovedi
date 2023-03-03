@@ -52,7 +52,9 @@ var uid = req.cookies["logged_in"]
     if(req.cookies["logged_in"]){
         var user = []
         db.query("SELECT * FROM users WHERE uid = ?",uid,(err,result)=>{
+            if(result){
             user = result[0]
+            }
             const query = "SELECT * FROM ".concat(user["uid"]," WHERE id < ",page *10 ," AND id > ",page *10 -10)
 
             db.query(query,(err,result) =>{
