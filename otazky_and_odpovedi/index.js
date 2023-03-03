@@ -4,6 +4,9 @@ const path = require("path")
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const bodyParser = require('body-parser');
+process = require("process")
+
+const port = process.env.PORT
 
 app = express()
 app.set('view engine', 'ejs')
@@ -28,10 +31,12 @@ function mkuid(length) {
 
 
 const db = mysql.createConnection({
-    host:"localhost",
+    host:"containers-us-west-25.railway.app",
     user:"root",
-    password:"",
-    database:"otazky_odpovedi"
+    password:"gxaErxwKNgfZUhJifpB1",
+    database:"railway",
+    port:7436,
+    
 })
 
 
@@ -201,4 +206,4 @@ app.post("/answer",(req,res)=>{
     res.render("redirect",{redirect_to:"./"})
 })
 
-app.listen(3000)
+app.listen(port)
