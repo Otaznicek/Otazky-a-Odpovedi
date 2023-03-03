@@ -50,7 +50,7 @@ else{
 }
 
 var uid = req.cookies["logged_in"]
-    if(req.cookies["logged_in"]) != undefined{
+    if(req.cookies["logged_in"] != undefined){
         var user = []
         db.query("SELECT * FROM users WHERE uid = ?",uid,(err,result)=>{
             if(result){
