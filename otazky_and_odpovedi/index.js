@@ -105,7 +105,7 @@ app.post("/register",(req,res)=>{
     }
 
     db.query("SELECT * FROM USERS WHERE username = ?",username,(err,result)=>{
-        if(result[0] == null){
+        if(result == undefined){
 
             var uid = mkuid(14)
             console.log(uid)
