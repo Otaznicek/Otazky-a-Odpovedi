@@ -4,15 +4,14 @@ const path = require("path")
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const bodyParser = require('body-parser');
-process = require("process")
-
+const process = require("process")
 const port = process.env.PORT
 
 app = express()
 app.set('view engine', 'ejs')
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cookieParser());
-app.use(session({secret: "mymynka"}));
+app.use(session({secret: "mangline"}));
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
@@ -31,22 +30,24 @@ function mkuid(length) {
 
 
 const db = mysql.createConnection({
-    host:"containers-us-west-25.railway.app",
-    user:"root",
-    password:"gxaErxwKNgfZUhJifpB1",
+    host:"containers-us-west-181.railway.app",
+    user:"postgres",
+    password:"2RuRSCgT1hY52LIQF4c2",
     database:"railway",
-    port:7436
-
 })
 
 db.query("SELECT * FROM users",(err,result)=>{
 if(err){
 console.log(err)}
-})
+}
+else{
+console.log(result)
+}
+)
+         
 
 
 app.get("/",(req,res)=>{
-console.log(req.cookies["logged_in_as"])
 if(req.query.page){
     page = Number(req.query.page)
 }
@@ -54,13 +55,11 @@ else{
     page = 1
 }
 
-var uid = req.cookies["logged_in_as"]
-    if(req.cookies["logged_in_as"] != undefined){
+var uid = req.cookies["logged_in"]
+    if(req.cookies["logged_in"]){
         var user = []
         db.query("SELECT * FROM users WHERE uid = ?",uid,(err,result)=>{
-            if(result){
             user = result[0]
-            }
             const query = "SELECT * FROM ".concat(user["uid"]," WHERE id < ",page *10 ," AND id > ",page *10 -10)
 
             db.query(query,(err,result) =>{
@@ -81,14 +80,11 @@ var uid = req.cookies["logged_in_as"]
 })
 
 app.get("/register",(req,res)=>{
-    console.log(req.cookies["logged_in_as"])
 res.render("register",{return_msg:""})
 
 })
 app.get("/login",(req,res)=>{
-    console.log(req.cookies["logged_in_as"])
-    
-if(req.cookies["logged_in_as"] != undefined){
+if(req.cookies["logged_in"]){
 res.render("redirect",{redirect_to:"./"})
 }
 else{
@@ -116,7 +112,7 @@ app.post("/register",(req,res)=>{
     }
 
     db.query("SELECT * FROM USERS WHERE username = ?",username,(err,result)=>{
-        if(result == undefined){
+        if(result[0] == null){
 
             var uid = mkuid(14)
             console.log(uid)
@@ -126,7 +122,7 @@ app.post("/register",(req,res)=>{
             const query = "CREATE TABLE " + uid + "(id int NOT NULL AUTO_INCREMENT,uid text,question text,answer text,PRIMARY KEY (id))"
             db.query(query)
 
-            res.cookie("logged_in_as",uid,{maxAge: 2.62974383 * Math.pow(10,9)})
+            res.cookie("logged_in",uid,{maxAge: 2.62974383 * Math.pow(10,9)})
 
             res.render("redirect",{redirect_to:"./"})
         }
@@ -140,14 +136,10 @@ app.post("/register",(req,res)=>{
 app.post("/login",(req,res)=>{
     const username = req.body["username"]
     const password = req.body["password"]
-    
-    console.log(username)
-    console.log(password)
-    
+
     db.query("SELECT * FROM users WHERE username = ? AND password = ?",[username,password],(err,result)=>{
-        console.log(result)
         if(result[0] != null){
-            res.cookie("logged_in_as",result[0]["uid"],{maxAge: 2.62974383 * Math.pow(10,9)})
+            res.cookie("logged_in",result[0]["uid"],{maxAge: 2.62974383 * Math.pow(10,9)})
             res.render("redirect",{redirect_to:"./"})
         }
         else{
@@ -158,21 +150,20 @@ app.post("/login",(req,res)=>{
 })
 
 app.get("/logout",(req,res)=>{
-        res.clearCookie("logged_in_as")
+        res.clearCookie("logged_in")
         res.render("redirect",{redirect_to:"./login"})
 
     })
 
 app.get("/user",(req,res)=>{
     const username = req.query["username"]
-    console.log(username)
     db.query("SELECT * FROM users WHERE username = ?",username,(err,result)=>
     {
         if(result[0]){
             user = result[0]
         
 
-        if(req.cookies["logged_in_as"] == user["uid"]){
+        if(req.cookies["logged_in"] == user["uid"]){
             res.render("redirect",{redirect_to:"./"})
         }
         else {
@@ -218,7 +209,6 @@ app.post("/answer",(req,res)=>{
         if(err){
             res.send("Error")
         }
-        
     })
     res.render("redirect",{redirect_to:"./"})
 })
