@@ -30,10 +30,11 @@ function mkuid(length) {
 
 
 const db = mysql.createConnection({
-    host:"containers-us-west-181.railway.app",
-    user:"postgres",
-    password:"2RuRSCgT1hY52LIQF4c2",
+    host:"localhost",
+    user:"root",
+    password:"OUPVoGrmTpMIvXA1kjH1",
     database:"railway",
+    port:7659
 })
 
 db.query("SELECT * FROM users",(err,result)=>{
