@@ -137,6 +137,7 @@ app.post("/login",(req,res)=>{
     const password = req.body["password"]
 
     db.query("SELECT * FROM users WHERE username = ? AND password = ?",[username,password],(err,result)=>{
+        console.log(result)
         if(result[0] != null){
             res.cookie("logged_in_as",result[0]["uid"],{maxAge: 2.62974383 * Math.pow(10,9)})
             res.render("redirect",{redirect_to:"./"})
