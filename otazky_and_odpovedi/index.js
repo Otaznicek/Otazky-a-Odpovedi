@@ -12,7 +12,7 @@ app = express()
 app.set('view engine', 'ejs')
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cookieParser());
-app.use(session({secret: "mangline"}));
+app.use(session({secret: "mymynka"}));
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
@@ -41,7 +41,7 @@ const db = mysql.createConnection({
 
 
 app.get("/",(req,res)=>{
-console.log(req.cookies["logged_in"])
+console.log(req.cookies["logged_in_as"])
 if(req.query.page){
     page = Number(req.query.page)
 }
@@ -49,8 +49,8 @@ else{
     page = 1
 }
 
-var uid = req.cookies["logged_in"]
-    if(req.cookies["logged_in"] != undefined){
+var uid = req.cookies["logged_in_as"]
+    if(req.cookies["logged_in_as"] != undefined){
         var user = []
         db.query("SELECT * FROM users WHERE uid = ?",uid,(err,result)=>{
             if(result){
@@ -80,7 +80,7 @@ res.render("register",{return_msg:""})
 
 })
 app.get("/login",(req,res)=>{
-if(req.cookies["logged_in"]){
+if(req.cookies["logged_in_as"]){
 res.render("redirect",{redirect_to:"./"})
 }
 else{
@@ -118,7 +118,7 @@ app.post("/register",(req,res)=>{
             const query = "CREATE TABLE " + uid + "(id int NOT NULL AUTO_INCREMENT,uid text,question text,answer text,PRIMARY KEY (id))"
             db.query(query)
 
-            res.cookie("logged_in",uid,{maxAge: 2.62974383 * Math.pow(10,9)})
+            res.cookie("logged_in_as",uid,{maxAge: 2.62974383 * Math.pow(10,9)})
 
             res.render("redirect",{redirect_to:"./"})
         }
@@ -135,7 +135,7 @@ app.post("/login",(req,res)=>{
 
     db.query("SELECT * FROM users WHERE username = ? AND password = ?",[username,password],(err,result)=>{
         if(result[0] != null){
-            res.cookie("logged_in",result[0]["uid"],{maxAge: 2.62974383 * Math.pow(10,9)})
+            res.cookie("logged_in_as",result[0]["uid"],{maxAge: 2.62974383 * Math.pow(10,9)})
             res.render("redirect",{redirect_to:"./"})
         }
         else{
@@ -146,7 +146,7 @@ app.post("/login",(req,res)=>{
 })
 
 app.get("/logout",(req,res)=>{
-        res.clearCookie("logged_in")
+        res.clearCookie("logged_in_as")
         res.render("redirect",{redirect_to:"./login"})
 
     })
