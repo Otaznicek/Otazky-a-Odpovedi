@@ -39,6 +39,10 @@ const db = mysql.createConnection({
 
 })
 
+db.query("SELECT * FROM users",(err,result)=>{
+console.log(result)
+})
+
 
 app.get("/",(req,res)=>{
 console.log(req.cookies["logged_in_as"])
