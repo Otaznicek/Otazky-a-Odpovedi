@@ -52,6 +52,7 @@ console.log(res)
 })
 
 app.get("/",(req,res)=>{
+console.log(req.cookies["logged_in"])
 if(req.query.page){
     page = Number(req.query.page)
 }
