@@ -36,17 +36,7 @@ const db = mysql.createConnection({
     database:"railway",
     port:7659
 })
-
-db.query("SELECT * FROM users",(err,result)=>{
-if(err){
-console.log(err)}
-}
-else{
-console.log(result)
-}
-)
-         
-
+  
 
 app.get("/",(req,res)=>{
 if(req.query.page){
