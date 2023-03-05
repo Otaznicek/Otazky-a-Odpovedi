@@ -41,7 +41,7 @@ const db = mysql.createConnection({
 
 db.query("SELECT * FROM users",(err,result)=>{
 if(err){
-console.log(err}
+console.log(err)}
 })
 
 
