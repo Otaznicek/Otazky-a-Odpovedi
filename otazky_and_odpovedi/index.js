@@ -37,7 +37,10 @@ const db = mysql.createConnection({
     port:7659
 })
   
-
+db.connect(function(err) {
+  if (err) throw err;
+  console.log("Connected!");
+});
 
 
 app.get("/",(req,res)=>{
