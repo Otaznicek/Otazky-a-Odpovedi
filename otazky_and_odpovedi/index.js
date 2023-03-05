@@ -30,7 +30,7 @@ function mkuid(length) {
 
 
 const db = mysql.createConnection({
-    host:"containers-us-west-198.railway.app",
+    host:"0.0.0.0",
     user:"root",
     password:"h64SvVZww9j9YtdOcyl6",
     database:"railway",
