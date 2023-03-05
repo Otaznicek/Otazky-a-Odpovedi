@@ -31,12 +31,14 @@ function mkuid(length) {
 
 const db = mysql.createConnection({
     host:"localhost",
-    user:"root",
-    password:"OUPVoGrmTpMIvXA1kjH1",
+    user:"maty",
+    password:"mangline",
     database:"railway",
     port:7659
 })
   
+
+
 
 app.get("/",(req,res)=>{
 if(req.query.page){
