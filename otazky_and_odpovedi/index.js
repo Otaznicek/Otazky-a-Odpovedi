@@ -76,10 +76,13 @@ var uid = req.cookies["logged_in_as"]
 })
 
 app.get("/register",(req,res)=>{
+    console.log(req.cookies["logged_in_as"])
 res.render("register",{return_msg:""})
 
 })
 app.get("/login",(req,res)=>{
+    console.log(req.cookies["logged_in_as"])
+    
 if(req.cookies["logged_in_as"]){
 res.render("redirect",{redirect_to:"./"})
 }
@@ -153,6 +156,7 @@ app.get("/logout",(req,res)=>{
 
 app.get("/user",(req,res)=>{
     const username = req.query["username"]
+    console.log(username)
     db.query("SELECT * FROM users WHERE username = ?",username,(err,result)=>
     {
         if(result[0]){
