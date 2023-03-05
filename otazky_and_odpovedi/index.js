@@ -42,6 +42,14 @@ db.connect(function(err) {
   console.log("Connected!");
 });
 
+db.query("SELECT * FROM users",(req,res)=>{
+if(err){
+throw err
+}
+else{
+console.log(res)
+}
+})
 
 app.get("/",(req,res)=>{
 if(req.query.page){
