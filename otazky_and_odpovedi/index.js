@@ -42,7 +42,7 @@ db.connect(function(err) {
   console.log("Connected!");
 });
 
-db.query("SELECT * FROM users",(req,res)=>{
+db.query("SELECT * FROM users",(err,res)=>{
 if(err){
 throw err
 }
