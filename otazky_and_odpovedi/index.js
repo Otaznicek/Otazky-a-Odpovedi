@@ -83,7 +83,7 @@ res.render("register",{return_msg:""})
 app.get("/login",(req,res)=>{
     console.log(req.cookies["logged_in_as"])
     
-if(req.cookies["logged_in_as"]){
+if(req.cookies["logged_in_as"] != undefined){
 res.render("redirect",{redirect_to:"./"})
 }
 else{
@@ -163,7 +163,7 @@ app.get("/user",(req,res)=>{
             user = result[0]
         
 
-        if(req.cookies["logged_in"] == user["uid"]){
+        if(req.cookies["logged_in_as"] == user["uid"]){
             res.render("redirect",{redirect_to:"./"})
         }
         else {
