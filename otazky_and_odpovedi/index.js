@@ -40,7 +40,8 @@ const db = mysql.createConnection({
 })
 
 db.query("SELECT * FROM users",(err,result)=>{
-console.log(result)
+if(err){
+console.log(err}
 })
 
 
