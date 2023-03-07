@@ -69,7 +69,7 @@ var uid = req.cookies["logged_in"]
         var user = []
         db.query("SELECT * FROM users WHERE uid = ?",uid,(err,result)=>{
             user = result[0]
-            const query = "SELECT * FROM ".concat(user["uid"]," WHERE id < ",page *10 ," AND id > ",page *10 -10)
+            const query = "SELECT * FROM ".concat(user["uid"]
 
             var href_bigger = "./?page=".concat(page+1)
             var href_smaller
@@ -83,9 +83,19 @@ var uid = req.cookies["logged_in"]
                 if(err){
                     console.log(err)
                 }
-                const questions = result
-                console.log(questions)
-                res.render("index",{user,questions:questions.reverse(),href_smaller:href_smaller,href_bigger:href_bigger})
+               
+                
+            questions = []
+            result = result.reverse()
+
+             if(page *10 < result.length || page * 10 == result.lenght){
+                questions = result.slice(0,page * 10)
+        }
+        else{
+            questions = result.slice(page *10 - 10)
+        }
+                
+                res.render("index",{user,questions:questions,href_smaller:href_smaller,href_bigger:href_bigger})
             })
 
             
@@ -209,9 +219,19 @@ app.get("/user",(req,res)=>{
         }
         else {
 
-        const query = "SELECT * FROM ".concat(user["uid"]," WHERE id < ",page *10 ," AND id > ",page *10 -10)
+        const query = "SELECT * FROM ".concat(user["uid"]
         db.query(query,(err,result)=>  {
-            res.render("user",{user:user,questions:result.reverse(),href_smaller:href_smaller,href_bigger:href_bigger})
+            questions = []
+            result = result.reverse()
+
+             if(page *10 < result.length || page * 10 == result.length){
+                questions = result.slice(0,page * 10)
+        }
+        else{
+            questions = result.slice(page *10 - 10)
+        }
+            
+            res.render("user",{user:user,questions:questions,href_smaller:href_smaller,href_bigger:href_bigger})
 
         })}
 
