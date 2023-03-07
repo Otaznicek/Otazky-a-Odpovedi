@@ -52,13 +52,17 @@ console.log(res)
 })
 
 app.get("/",(req,res)=>{
-console.log(req.cookies["logged_in"])
 if(req.query.page){
     page = Number(req.query.page)
 }
 else{
     page = 1
 }
+if(page < 1){
+    page = 1
+}
+
+
 
 var uid = req.cookies["logged_in"]
     if(req.cookies["logged_in"]){
@@ -67,13 +71,21 @@ var uid = req.cookies["logged_in"]
             user = result[0]
             const query = "SELECT * FROM ".concat(user["uid"]," WHERE id < ",page *10 ," AND id > ",page *10 -10)
 
+            var href_bigger = "./?page=".concat(page+1)
+            var href_smaller
+            if(page < 2){
+                href_smaller = "./?page=1"
+            }
+            else{
+                href_smaller = "./?page=".concat(page-1)
+            }
             db.query(query,(err,result) =>{
                 if(err){
                     console.log(err)
                 }
                 const questions = result
                 console.log(questions)
-                res.render("index",{user,questions:questions})
+                res.render("index",{user,questions:questions,href_smaller:href_smaller,href_bigger:href_bigger})
             })
 
             
@@ -116,7 +128,7 @@ app.post("/register",(req,res)=>{
         res.render("register",{return_msg:"Heslo ma mit aspon 8 znaku!"})
     }
 
-    db.query("SELECT * FROM users WHERE username = ?",username,(err,result)=>{
+    db.query("SELECT * FROM USERS WHERE username = ?",username,(err,result)=>{
         if(result[0] == null){
 
             var uid = mkuid(14)
@@ -161,19 +173,45 @@ app.get("/logout",(req,res)=>{
     })
 
 app.get("/user",(req,res)=>{
+    if(req.query.page){
+        page = Number(req.query.page)
+    }
+    else{
+        page = 1
+    }
+    if(page < 1){
+        page = 1
+    }
+
+    
+
     const username = req.query["username"]
+
+    console.log(username)
+
     db.query("SELECT * FROM users WHERE username = ?",username,(err,result)=>
     {
         if(result[0]){
             user = result[0]
-        
+            
+            var href_bigger = "./user?username=".concat(user["username"] + "&" + "page=" + Number(page +1))
+            var href_smaller
+            if(page < 2){
+                href_smaller = "./user?username=".concat(user["username"] + "&" + "page=" + 1)
+            }
+            else{
+                href_smaller = "./user?username=".concat(user["username"] + "&" + "page=" + Number(page -1))
+            }
+
 
         if(req.cookies["logged_in"] == user["uid"]){
             res.render("redirect",{redirect_to:"./"})
         }
         else {
-        db.query("SELECT * FROM " + user["uid"],(err,result)=>  {
-            res.render("user",{user:user,questions:result})
+
+        const query = "SELECT * FROM ".concat(user["uid"]," WHERE id < ",page *10 ," AND id > ",page *10 -10)
+        db.query(query,(err,result)=>  {
+            res.render("user",{user:user,questions:result,href_smaller:href_smaller,href_bigger:href_bigger})
 
         })}
 
