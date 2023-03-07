@@ -2,6 +2,7 @@
 <head>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
@@ -13,6 +14,14 @@
     </title>
 </head>
 <body>
+ <ul>
+<li><a href="./" class="logout"><span class="material-symbols-outlined">
+home
+</span></a></li>
+<li><a href="./logout" class="logout">Logout</a></li>
+</ul>
+ </nav>
+
 <h1 class="main_heading"><%= user["username"] %></h1>
 
 <div class="ask">
@@ -23,6 +32,11 @@
 </form>
 
 </div>
+<div class="pagination"><a href="<%= href_smaller %>" class="next_page"><span class="material-symbols-outlined">
+    arrow_back
+    </span></a> <a href="<%= href_bigger %>" class="next_page"><span class="material-symbols-outlined">
+        arrow_forward
+        </span></a></div>
 
 <div class="questions_container">
 <% questions.forEach(question => { %>
@@ -41,6 +55,5 @@
     </div>
    <% }) %>
 </div>
-<a class="logout" href="./logout">logout</a>
 </body>
 </html>
