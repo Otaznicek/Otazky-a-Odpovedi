@@ -16,12 +16,12 @@ html{
     width: 50%;
     text-align: center;
     justify-content: center;
-    background-color: white;
-    border-radius: 20px;
+    
 }
 .question{
     border: 1px solid;
     border-radius: 20px;
+    background-color: white;
 }
 
 .answer{
@@ -57,4 +57,49 @@ textarea{
     height: 200px;
     border-radius: 20px;
     resize: none;
+}
+.logout{
+    color: white;
+    
+}
+
+li{
+    list-style: none;
+}
+ul{
+    display: flex;
+    gap: 50px;
+    left: 0;
+}
+.pagination{
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    gap: 70px;
+    width: 100%;
+}
+.next_page{
+    color: white;
+    margin-bottom: 5px;
+}
+@media only screen and (max-width: 769px) {
+.ask_textarea, .answer{
+    width: 100%;
+}
+.question_heading{
+    font-size: 18px;
+}
+.answer{
+    font-size: 16px;
+    text-align: center;
+}
+.question{
+  width: 100%;
+}
+.questions_container{
+    width: 100%;
+}
+textarea{
+width: 100%;
+}
 }
