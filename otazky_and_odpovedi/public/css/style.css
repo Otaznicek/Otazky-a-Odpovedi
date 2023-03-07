@@ -51,8 +51,11 @@ label{
     border: 1px solid;
 }
 
-.ask{
-    margin: auto;
-    text-align: center;
-    justify-content: center;
+@media only screen and (max-width: 769px) {
+.login_form_div, .register_form_div{
+    width: 100%;
+    top: 10vh;
+}
+
+
 }
