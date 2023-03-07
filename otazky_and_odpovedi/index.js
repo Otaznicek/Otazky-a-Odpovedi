@@ -85,7 +85,7 @@ var uid = req.cookies["logged_in"]
                 }
                 const questions = result
                 console.log(questions)
-                res.render("index",{user,questions:questions.reversed(),href_smaller:href_smaller,href_bigger:href_bigger})
+                res.render("index",{user,questions:questions.reverse(),href_smaller:href_smaller,href_bigger:href_bigger})
             })
 
             
@@ -211,7 +211,7 @@ app.get("/user",(req,res)=>{
 
         const query = "SELECT * FROM ".concat(user["uid"]," WHERE id < ",page *10 ," AND id > ",page *10 -10)
         db.query(query,(err,result)=>  {
-            res.render("user",{user:user,questions:result.reversed(),href_smaller:href_smaller,href_bigger:href_bigger})
+            res.render("user",{user:user,questions:result.reverse(),href_smaller:href_smaller,href_bigger:href_bigger})
 
         })}
 
