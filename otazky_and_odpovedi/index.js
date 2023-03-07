@@ -69,7 +69,7 @@ var uid = req.cookies["logged_in"]
         var user = []
         db.query("SELECT * FROM users WHERE uid = ?",uid,(err,result)=>{
             user = result[0]
-            const query = "SELECT * FROM ".concat(user["uid"]
+            const query = "SELECT * FROM ".concat(user["uid"])
 
             var href_bigger = "./?page=".concat(page+1)
             var href_smaller
@@ -219,7 +219,7 @@ app.get("/user",(req,res)=>{
         }
         else {
 
-        const query = "SELECT * FROM ".concat(user["uid"]
+        const query = "SELECT * FROM ".concat(user["uid"])
         db.query(query,(err,result)=>  {
             questions = []
             result = result.reverse()
