@@ -128,7 +128,7 @@ app.post("/register",(req,res)=>{
         res.render("register",{return_msg:"Heslo ma mit aspon 8 znaku!"})
     }
 
-    db.query("SELECT * FROM USERS WHERE username = ?",username,(err,result)=>{
+    db.query("SELECT * FROM users WHERE username = ?",username,(err,result)=>{
         if(result[0] == null){
 
             var uid = mkuid(14)
