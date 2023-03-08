@@ -70,9 +70,6 @@ var uid = req.cookies["logged_in"]
         db.query("SELECT * FROM users WHERE uid = ?",uid,(err,result)=>{
             user = result[0]
             const query = "SELECT * FROM ".concat(user["uid"])
-            result = result.reverse()
-            questions = result.slice(page *5 -5, page *5)
-
             var href_bigger = "./?page=".concat(page+1)
             var href_smaller
             if(page < 2){
@@ -86,7 +83,8 @@ var uid = req.cookies["logged_in"]
                 if(err){
                     console.log(err)
                 }
-                
+            result = result.reverse()
+            questions = result.slice(page *5 -5, page *5)
                 res.render("index",{user,questions:questions,href_smaller:href_smaller,href_bigger:href_bigger})
             })
 
