@@ -87,7 +87,7 @@ var uid = req.cookies["logged_in"]
                 
             questions = []
             result = result.reverse()
-            questions = result.slice(page *10 -10, page *10 + 10)
+            questions = result.slice(page *5 -5, page *5)
                 
                 res.render("index",{user,questions:questions,href_smaller:href_smaller,href_bigger:href_bigger})
             })
