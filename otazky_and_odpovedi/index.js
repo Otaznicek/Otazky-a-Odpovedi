@@ -219,7 +219,6 @@ app.get("/user",(req,res)=>{
 
         const query = "SELECT * FROM ".concat(user["uid"])
         db.query(query,(err,result)=>  {
-            questions = []
             result = result.reverse()
             questions = result.slice(page *5 -5, page *5)
             
