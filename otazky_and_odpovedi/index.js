@@ -217,8 +217,7 @@ app.get("/user",(req,res)=>{
         db.query(query,(err,result)=>  {
             questions = []
             result = result.reverse()
-               
-            questions = result.slice(page *10 -10, page *10 + 10)
+            questions = result.slice(page *5 -5, page *5)
             
             res.render("user",{user:user,questions:questions,href_smaller:href_smaller,href_bigger:href_bigger})
 
