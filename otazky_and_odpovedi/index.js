@@ -78,13 +78,18 @@ var uid = req.cookies["logged_in"]
             else{
                 href_smaller = "./?page=".concat(page-1)
             }
-
+            
+            
             db.query(query,(err,result) =>{
                 if(err){
                     console.log(err)
                 }
             result = result.reverse()
             questions = result.slice(page *5 -5, page *5)
+                
+            if(page +1 *5> result.length){
+            href_bigger = "./?page=".concat(page)
+            }
                 res.render("index",{user,questions:questions,href_smaller:href_smaller,href_bigger:href_bigger})
             })
 
@@ -213,7 +218,9 @@ app.get("/user",(req,res)=>{
         db.query(query,(err,result)=>  {
             result = result.reverse()
             questions = result.slice(page *5 -5, page *5)
-            
+            if(page +1 *5> result.length){
+            href_bigger = "./user?username=".concat(user["username"] + "&" + "page=" + Number(page))
+            }
             res.render("user",{user:user,questions:questions,href_smaller:href_smaller,href_bigger:href_bigger})
 
         })}
