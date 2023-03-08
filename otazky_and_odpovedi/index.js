@@ -87,13 +87,7 @@ var uid = req.cookies["logged_in"]
                 
             questions = []
             result = result.reverse()
-
-             if(page *10 < result.length || page * 10 == result.lenght){
-                questions = result.slice(0,page * 10)
-        }
-        else{
-            questions = result.slice(page *10 - 10)
-        }
+            questions = result.slice(page *10 -10, page *10 + 10)
                 
                 res.render("index",{user,questions:questions,href_smaller:href_smaller,href_bigger:href_bigger})
             })
@@ -223,13 +217,8 @@ app.get("/user",(req,res)=>{
         db.query(query,(err,result)=>  {
             questions = []
             result = result.reverse()
-
-             if(page *10 < result.length || page * 10 == result.length){
-                questions = result.slice(0,page * 10)
-        }
-        else{
-            questions = result.slice(page *10 - 10)
-        }
+               
+            questions = result.slice(page *10 -10, page *10 + 10)
             
             res.render("user",{user:user,questions:questions,href_smaller:href_smaller,href_bigger:href_bigger})
 
