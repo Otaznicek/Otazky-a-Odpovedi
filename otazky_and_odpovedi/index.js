@@ -85,7 +85,7 @@ var uid = req.cookies["logged_in"]
                 }
             result = result.reverse()
               
-             if(page * 5 > result.lenght){
+             if(page > Math.floor(result.length / 5)){
              page = Math.floor(result.length / 5)
              }   
                 
