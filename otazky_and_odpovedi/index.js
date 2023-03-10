@@ -86,7 +86,7 @@ var uid = req.cookies["logged_in"]
             result = result.reverse()
               
              if(page > Math.floor(result.length / 5)){
-             href_bigger =  "./?page=".concat(Math.floor(result.length / 5))
+             href_bigger =  "./?page=".concat(Number(Math.floor(result.length / 5) +1))
              }   
                 
             questions = result.slice(page *5 -5, page *5)
@@ -219,7 +219,7 @@ app.get("/user",(req,res)=>{
         db.query(query,(err,result)=>  {
             result = result.reverse()
              if(page > Math.floor(result.length / 5)){
-             href_bigger = "./user?username=".concat(user["username"] + "&" + "page=" + Number(Math.floor(result.length/5)))
+             href_bigger = "./user?username=".concat(user["username"] + "&" + "page=" + Number(Math.floor(result.length/5) +1))
              } 
             questions = result.slice(page *5 -5, page *5)  
             res.render("user",{user:user,questions:questions,href_smaller:href_smaller,href_bigger:href_bigger})
