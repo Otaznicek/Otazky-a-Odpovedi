@@ -85,11 +85,13 @@ var uid = req.cookies["logged_in"]
                     console.log(err)
                 }
             result = result.reverse()
+              
+             if(page * 5 > result.lenght){
+             page = Math.floor(result.length / 5)
+             }   
+                
             questions = result.slice(page *5 -5, page *5)
                 
-            if(page +1 *5> result.length){
-            href_bigger = "./?page=".concat(page)
-            }
                 res.render("index",{user,questions:questions,href_smaller:href_smaller,href_bigger:href_bigger})
             })
 
@@ -218,9 +220,9 @@ app.get("/user",(req,res)=>{
         db.query(query,(err,result)=>  {
             result = result.reverse()
             questions = result.slice(page *5 -5, page *5)
-            if(page +1 *5> result.length){
-            href_bigger = "./user?username=".concat(user["username"] + "&" + "page=" + Number(page))
-            }
+             if(page * 5 > result.lenght){
+             page = Math.floor(result.length / 5)
+             }   
             res.render("user",{user:user,questions:questions,href_smaller:href_smaller,href_bigger:href_bigger})
 
         })}
